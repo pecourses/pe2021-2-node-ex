@@ -1,14 +1,46 @@
-// 1 node native modules
 const os = require('os')
+const fs = require('fs')
+const util = require('util')
 
-// 2 node_modeles
-const yup = require('yup')
+// console.log('os.hostname()', os.hostname())
+// вывести цп и дом. директорию
+// console.log('os.cpus()', os.cpus())
+// console.log('os.homedir()', os.homedir())
 
-// 3 file *.js/json
-const math = require('./math')
+// const mathText = fs.readFileSync('./math.js', { encoding: 'utf-8' })
+// console.log('mathText', mathText)
 
-// 4 folder:
-// 4.1 package.json: "main":"file"
-// 4.2 index.js
+// async in node by callbacks (error first)
+// fs.readFile('./math.js', { encoding: 'utf-8' }, (err, data) => {
+//   if (err) {
+//     console.log('err', err)
+//   } else {
+//     console.log('data', data)
+//   }
+// })
 
-// 5 error
+// промисифицировать readFile с помощью util.promisify
+
+const readFile = util.promisify(fs.readFile)
+
+// readFile('./math.js', { encoding: 'utf-8' })
+//   .then(data => console.log('data', data))
+//   .catch(err => console.log('err', err))
+
+const dirContaining = fs.readdirSync('.')
+// console.log('dirContaining', dirContaining)
+
+// вывести содержимое js файлов текущей директории
+// .*\.js
+
+// dirContaining
+//   .filter(f => f.endsWith('.js'))
+//   .forEach(f =>
+//     readFile(f, { encoding: 'utf-8' })
+//       .then(data => console.log('data', data))
+//       .catch(err => console.log('err', err))
+//   )
+
+console.log('process', process.env)
+console.log('__filename', __filename)
+console.log('__dirname', __dirname)
