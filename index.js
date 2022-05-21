@@ -1,46 +1,31 @@
-const os = require('os')
-const fs = require('fs')
-const util = require('util')
+const http = require('http')
 
-// console.log('os.hostname()', os.hostname())
-// вывести цп и дом. директорию
-// console.log('os.cpus()', os.cpus())
-// console.log('os.homedir()', os.homedir())
+const PORT = process.env.PORT || 5000
+const HOST = 'localhost'
 
-// const mathText = fs.readFileSync('./math.js', { encoding: 'utf-8' })
-// console.log('mathText', mathText)
+// создание http-сервера
+const httpServer = http.createServer((request, response) => {
+  const { url, method } = request
+  console.log('url', url)
+  console.log('method', method)
 
-// async in node by callbacks (error first)
-// fs.readFile('./math.js', { encoding: 'utf-8' }, (err, data) => {
-//   if (err) {
-//     console.log('err', err)
-//   } else {
-//     console.log('data', data)
-//   }
-// })
+  response.statusCode = 200
+  response.setHeader('Content-Type', 'text/html')
+  response.end(
+    `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Home</h1>
+  </body>
+  </html>`
+  )
+})
 
-// промисифицировать readFile с помощью util.promisify
-
-const readFile = util.promisify(fs.readFile)
-
-// readFile('./math.js', { encoding: 'utf-8' })
-//   .then(data => console.log('data', data))
-//   .catch(err => console.log('err', err))
-
-const dirContaining = fs.readdirSync('.')
-// console.log('dirContaining', dirContaining)
-
-// вывести содержимое js файлов текущей директории
-// .*\.js
-
-// dirContaining
-//   .filter(f => f.endsWith('.js'))
-//   .forEach(f =>
-//     readFile(f, { encoding: 'utf-8' })
-//       .then(data => console.log('data', data))
-//       .catch(err => console.log('err', err))
-//   )
-
-console.log('process', process.env)
-console.log('__filename', __filename)
-console.log('__dirname', __dirname)
+// запуск http-сервера
+httpServer.listen(PORT, HOST, () => {
+  console.log(`Server instance is listening http://${HOST}:${PORT}`)
+})
