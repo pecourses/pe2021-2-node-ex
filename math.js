@@ -8,5 +8,6 @@ const mult = (a, b) => a * b
 
 // named
 // module.exports = { sum, mult }
+
 module.exports.sum = sum
 module.exports.mult = mult

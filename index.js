@@ -1,17 +1,14 @@
-// Common JS modules
+// 1 node native modules
+const os = require('os')
 
-//console.log('require()', require('./math.js'))
+// 2 node_modeles
+const yup = require('yup')
 
-// def imp
-// import sum1 from './math'
-// const sum1 = require('./math')
-// console.log('sum1(1,2,3,4,5,6)', sum1(1, 2, 3, 4, 5, 6))
+// 3 file *.js/json
+const math = require('./math')
 
-// named
+// 4 folder:
+// 4.1 package.json: "main":"file"
+// 4.2 index.js
 
-// импортировать mult обоими синтаксисами
-// const { sum, mult } = require('./math')
-const Math = require('./math')
-
-console.log('sum(1,2,3,4,5,6)', Math.sum(1, 2, 3, 4, 5, 6))
-console.log('Math.mult(1,2)', Math.mult(1, 2))
+// 5 error
